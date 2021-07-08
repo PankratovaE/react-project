@@ -7,19 +7,20 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Home work#1
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <Message text1="My react-component" text2="I already installed the extension react devtools" />
       </header>
     </div>
   );
 }
 
+function Message(props) {
+  return (
+    <div>
+      <p className="text1">{ props.text1 }</p>
+      <p className="text2">{ props.text2 }</p>
+    </div>
+  )
+}
 export default App;
