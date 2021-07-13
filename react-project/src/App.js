@@ -1,26 +1,53 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState, useEffect } from 'react';
 
-function App() {
+export default function App() {
+
+  const [ messageList, setMessageList ] = useState([]);
+  
+  const [valueText, setValueText] = useState('');
+  const [isAnswer, setIsAnswer] = useState(false);
+  const [valueAuthor, setValueAuthor] = useState('');
+
+  const handleChangeAuthor = (event) => {
+    setValueAuthor(event.target.value);
+    setIsAnswer(false);
+  };
+  
+  const handleChangeText = (event) => {
+    setValueText(event.target.value);
+    setIsAnswer(false);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    let messages = Object.assign(messageList);
+    messages.push({author: valueAuthor, text: valueText});
+
+    setMessageList(messages);
+
+    setTimeout(() => {
+      setIsAnswer(true);
+    }, 1500);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Home work#1
-        </p>
-      <Message text1="My react-component" text2="I already installed the extension react devtools" />
+        <div>
+          { messageList.map((message, index) => <div key={ index }> { message.author }:  { message.text } </div> )}
+        </div>
+        <form className="form">
+            Author: <input className="form__input" type="text" value={ valueAuthor } onChange={ handleChangeAuthor }/>
+            Text: <input className="form__input" type="text-area" value={ valueText } onChange={ handleChangeText } />
+            <button className="form__button" type="submit" onClick={ handleSubmit }>Send my message</button>
+            { isAnswer && <p>Succes!</p> }
+        </form>
       </header>
     </div>
   );
 }
 
-function Message(props) {
-  return (
-    <div>
-      <p className="text1">{ props.text1 }</p>
-      <p className="text2">{ props.text2 }</p>
-    </div>
-  )
-}
-export default App;
