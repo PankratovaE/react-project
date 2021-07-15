@@ -44,3 +44,31 @@
 .text2 {
   border-bottom: 1px solid #61dafb;;
 }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+
+.form__input {
+  height: 30px;
+  margin: 10px 0;
+  padding: 5px;
+  border: none;
+  outline: none;
+}
+
+.form__input:focus {
+  outline: 2px solid #61dafb;
+}
+.form__button {
+  width: 100%;
+  height: 30px;
+  padding: 5px;
+  border: none;
+  background-color: #61dafb;
+}
+.form__button:active {
+  background-color: #1094b4;
+}
