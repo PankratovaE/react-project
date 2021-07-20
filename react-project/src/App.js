@@ -2,52 +2,56 @@ import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from 'react';
 
-export default function App() {
-
+const App = () => {
   const [ messageList, setMessageList ] = useState([]);
+  const [ value, setValue ] = useState('');
+  const [ valueText, setValueText] = useState('');
   
-  const [valueText, setValueText] = useState('');
-  const [isAnswer, setIsAnswer] = useState(false);
-  const [valueAuthor, setValueAuthor] = useState('');
 
-  const handleChangeAuthor = (event) => {
-    setValueAuthor(event.target.value);
-    setIsAnswer(false);
-  };
-  
-  const handleChangeText = (event) => {
-    setValueText(event.target.value);
-    setIsAnswer(false);
-  };
+  useEffect(() => {
+    setValue('Robot');
+    setMessageList ([{author: 'Robot', text: "Let's talk!"}])
+  }, [])
+
+  useEffect(() => {
+    if (value !== 'Robot') {
+          setValue('Robot');
+     const robotAnswer = setTimeout(() => {
+      setMessageList ([...messageList, { author: 'Robot', text: 'Good message!'}])
+  }, 1500) 
+
+    }
+  }, [ messageList ])
+
+  const handleValue = (event) => {
+    setValue(event.target.value)
+  }
+  const handleValueText = (event) => {
+    setValueText(event.target.value)
+  }
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-
-    let messages = Object.assign(messageList);
-    messages.push({author: valueAuthor, text: valueText});
-
-    setMessageList(messages);
-
-    setTimeout(() => {
-      setIsAnswer(true);
-    }, 1500);
-  };
+    event.preventDefault()
+    setMessageList ([...messageList, {author: value, text: valueText } ])
+  }
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <div>
-          { messageList.map((message, index) => <div key={ index }> { message.author }:  { message.text } </div> )}
-        </div>
+        
         <form className="form">
-            Author: <input className="form__input" type="text" value={ valueAuthor } onChange={ handleChangeAuthor }/>
-            Text: <input className="form__input" type="text-area" value={ valueText } onChange={ handleChangeText } />
+            <div>{ messageList.map((n, index) => <div key={ index }>{ n.author }:  { n.text } </div>) }</div>
+            
+            Name: <input className="form__input" type="text-area" value={ value } onChange={ handleValue } />
+            Text: <input className="form__input" type="text-area" value={ valueText } onChange={ handleValueText } />
             <button className="form__button" type="submit" onClick={ handleSubmit }>Send my message</button>
-            { isAnswer && <p>Succes!</p> }
+            
         </form>
       </header>
     </div>
   );
 }
+
+export default App;
 
