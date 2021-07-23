@@ -9,44 +9,25 @@ const styles = {
     background: "",
   },
   input: {
-    color: "white",
+    color: "black",
     borderBottom: '1px solid white'
   },
 };
 
 const MessageForm = (props) => {
-  const timer = useRef(null);
-  const [ messageList, setMessageList ] = useState([]);
+  const { onSubmit } = props;
+
+
   const [ value, setValue ] = useState('');
   const [ valueText, setValueText] = useState('');
   const inputRef = useRef(null);
   const { classes } = props;
 
   useEffect(() => {
-    setMessageList ([{author: 'Robot', text: "Let's talk!"}]);
-
+        inputRef.current?.focus();
    }, []);
 
-  useEffect(() => {
-
-    if (messageList.length && messageList[messageList.length-1].author !== 'Robot') {
-        timer.current = setTimeout(() => {
-        setMessageList ([...messageList, { author: 'Robot', text: 'Good message!'}]);
-        inputRef.current?.focus();
-        setValue('');
-        setValueText('');
-
-      }, 1500);
-
-    }
-  }, [ messageList ]);
-
-  useEffect(() => {
-    return () => {
-      clearTimeout(timer.current);
-    }
-  }, []);
-
+ 
 
   const handleValue = (event) => {
     setValue(event.target.value)
@@ -58,15 +39,16 @@ const MessageForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    setMessageList ([...messageList, {author: value, text: valueText } ])
+
+    if (onSubmit) {
+      onSubmit(valueText, value)
+      setValue('')
+      setValueText('')
+    }
   }
 
   return (
-    <div className="chat-form">
-      <div className="chat-message">
-        { messageList.map((mes, index) => <div key={ index }>{ mes.author }:  { mes.text } </div>) }
-      </div>
-      <form className="form">
+      <form className="form" onSubmit={ handleSubmit }>
         <TextField
         autoFocus
         required
@@ -90,10 +72,8 @@ const MessageForm = (props) => {
         <button
         className="form__button"
         type="submit"
-        onClick={ handleSubmit }
         >Send my message</button>
       </form>
-    </div>
   )
 
 }
