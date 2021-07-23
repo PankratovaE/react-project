@@ -14,11 +14,10 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #585a5f;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
@@ -37,6 +36,20 @@
   }
 }
 
+.chat-page {
+  display: flex;
+  align-items: baseline;
+  margin-top: 30px;
+
+}
+.chat-form {
+  margin-left: 40px;
+}
+.chat-message {
+  text-align: left;
+  margin-bottom: 40px;
+}
+
 .text1 {
   color: #61dafb;
 }
@@ -51,24 +64,27 @@
   align-items: baseline;
 }
 
-.form__input {
+/* .form__input {
   width: 100%;
   height: 30px;
   margin: 10px 0;
   padding: 5px;
   border: none;
   outline: none;
-}
+  color: antiquewhite;
 
-.form__input:focus {
+} */
+
+/* .form__input:focus {
   outline: 2px solid #61dafb;
-}
+} */
 .form__button {
   width: 100%;
   height: 30px;
   padding: 5px;
   border: none;
   background-color: #61dafb;
+  margin-top: 40px;
 }
 .form__button:active {
   background-color: #1094b4;
