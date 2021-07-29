@@ -67,7 +67,12 @@
   text-align: left;
   margin-bottom: 40px;
 }
-
+.message-block {
+  display: flex;
+  width: 400px;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
 .text1 {
   color: #61dafb;
 }

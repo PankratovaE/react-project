@@ -3,6 +3,8 @@ import { useState, useEffect, useRef } from 'react';
 import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import { profileSelector } from './Selectors/profile';
+import { useSelector } from 'react-redux';
 
 const styles = {
   root: {
@@ -23,8 +25,11 @@ const MessageForm = (props) => {
   const inputRef = useRef(null);
   const { classes } = props;
 
+  const { name } = useSelector(profileSelector);
+
   useEffect(() => {
         inputRef.current?.focus();
+        setValue(name);
    }, []);
 
  
@@ -42,7 +47,7 @@ const MessageForm = (props) => {
 
     if (onSubmit) {
       onSubmit(valueText, value)
-      setValue('')
+      setValue(name)
       setValueText('')
     }
   }
