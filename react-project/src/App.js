@@ -1,8 +1,11 @@
 import './App.css';
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
+import { useSelector } from 'react-redux';
+import { profileSelector } from './Selectors/profile';
 
-import GenerateList from './GenerateList.js';
-import MessageForm from './MessageForm.js';
+
+// import GenerateList from './GenerateList.js';
+// import MessageForm from './MessageForm.js';
 
 
 const App = () => {
@@ -17,18 +20,13 @@ const App = () => {
       fontSize: 22,
     },
   });
+
+  const { name } = useSelector(profileSelector)
  
   return (
     <ThemeProvider theme={ theme }>
-      <div className="App">
-        <header className="App-header">
-          <div className="chat-page">
-            <div className="chat-list">Chat's list
-              <GenerateList />
-            </div>
-            <MessageForm />
-          </div>
-        </header>
+      <div className="App-home">
+        { name }, welcome to our chat!
       </div>
     </ThemeProvider>
   );
