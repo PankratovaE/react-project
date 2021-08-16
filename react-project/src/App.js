@@ -2,6 +2,7 @@ import './App.css';
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import { useSelector } from 'react-redux';
 import { profileSelector } from './Selectors/profile';
+import { Link } from 'react-router-dom';
 
 
 // import GenerateList from './GenerateList.js';

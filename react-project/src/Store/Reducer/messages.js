@@ -1,5 +1,4 @@
 import { ADD_MESSAGE, DELETE_MESSAGE, CLEAN_CHAT } from "../Action/messages";
-import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
     //chatId: [
