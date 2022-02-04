@@ -1,8 +1,8 @@
 import './App.css';
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 
-import GenerateList from './GenerateList.js';
-import MessageForm from './MessageForm.js';
+// import GenerateList from './GenerateList.js';
+// import MessageForm from './MessageForm.js';
 
 
 const App = () => {
@@ -20,15 +20,8 @@ const App = () => {
  
   return (
     <ThemeProvider theme={ theme }>
-      <div className="App">
-        <header className="App-header">
-          <div className="chat-page">
-            <div className="chat-list">Chat's list
-              <GenerateList />
-            </div>
-            <MessageForm />
-          </div>
-        </header>
+      <div className="App-home">
+        Welcome to our chat!
       </div>
     </ThemeProvider>
   );
