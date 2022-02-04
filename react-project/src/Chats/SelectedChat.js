@@ -1,16 +1,15 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import MessageForm from '../MessageForm';
 import Message from '../Message';
 import '../App.css';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { addMessage, deleteMessage } from '../Store/Action/messages';
+import { addMessageWithThunk, deleteMessage } from '../Store/Action/messages';
 import { useDispatch, useSelector } from 'react-redux'
 import { Button } from '@material-ui/core';
 import { messagesSelector } from '../Selectors/messages';
 
 const SelectedChat = (props) => {
-  const timer = useRef(null);
 
   const params = useParams();
   const dispatch = useDispatch()
@@ -23,40 +22,17 @@ const SelectedChat = (props) => {
 
   }, [ messages ])
 
-  useEffect(() => {
+  const handleSubmit = useCallback((newMessage, newAuthor, id) => {
 
-    if (messageList.length && messageList[messageList.length-1].author !== 'Robot') {
-      timer.current = setTimeout(() => {
-
-      dispatch(addMessage('Robot', 'Good message!', +params.chatId))
-
-    }, 1500);
-    }
-  }, [ messageList ]);
-
-  useEffect(() => {
-
-    return () => {
-      clearTimeout(timer.current);
-    }
+    dispatch(addMessageWithThunk(newAuthor, newMessage, +params.chatId))
     
-  }, []);
+  }, [params.chatId, dispatch])
 
-  const handleSubmit = (newMessage, newAuthor, id) => {
-
-    dispatch(addMessage(newAuthor, newMessage, +params.chatId))
-    
-  }
-
-  const handleDeleteMessage = (message, index) => {
+  const handleDeleteMessage = (id, index) => {
 
     setMessageList((currentMessageList) => currentMessageList.splice(index, 1))
-    dispatch(deleteMessage(message.id))
-    //Пока не все гладко с удалением сообщений - не могу понять почему после
-    //удаления приходит сообщение от робота, даже если последний ответ от него,
-    //и такое ощущение, что происходит не перерисовка, а перезагрузка страницы
-    //после удаления сообщения. Мария, поясните, пожалуйста, эти моменты, хотя 
-    //бы в каком направлении думать)) Спасибо!
+    dispatch(deleteMessage(id))
+
   }
 
   return (
@@ -67,10 +43,10 @@ const SelectedChat = (props) => {
         { messageList.map((mes, index) => 
           <div className="message-block">
             <Message 
-              key={index}
+              key={mes.id}
               text={mes.text}
               author={mes.author}/>
-            <Button onClick={() => handleDeleteMessage(mes, params.chatId, index)}>&#10005;</Button>
+            <Button onClick={() => handleDeleteMessage(mes.id, index)}>&#10005;</Button>
               </div>)}
               <hr className="chat-form_hr"/>
             <MessageForm onSubmit={handleSubmit}/>
