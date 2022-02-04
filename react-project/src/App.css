@@ -120,3 +120,24 @@
 .header-div a {
   margin-right: 20px;
 }
+.API__btn-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.testAPI__block {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 40px;
+}
+.testAPI__item {
+  padding: 5px;
+}
+.margin_btn {
+  margin-right: 40px;
+}
+.API__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

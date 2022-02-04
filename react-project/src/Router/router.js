@@ -6,6 +6,7 @@ import App from '../App.js';
 import Chats from '../Chats/Chats';
 import SelectedChat from '../Chats/SelectedChat';
 import Profile from '../Profile/Profile.js';
+import CompAPI from '../compAPI/compAPI.js';
 
 export default function Router() {
     return (
@@ -14,6 +15,7 @@ export default function Router() {
                 <Link to="/">Home</Link>
                 <Link to="/chats">Chats</Link>
                 <Link to="/profile">Profile</Link>
+                <Link to="/apitest">API test</Link>
             </div>
 
             <Switch>
@@ -21,6 +23,9 @@ export default function Router() {
                 <Route exact path="/chats" render={()=> <Chats />} />
                 <Route path="/chats/:chatId" render={()=> <SelectedChat />} />
                 <Route path="/profile" render={()=> <Profile />} />
+                <Route path="/apitest" render={()=> <CompAPI />} />
+  
+
                 <Route>
                     <p>404: not found</p>
                 </Route>
