@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import { changeAge, changeName, changeShowName } from '../Store/Action/profile';
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react';
+import {profileSelector} from '../Selectors/profile';
 
 
 const Profile = (props) => {
@@ -12,7 +13,7 @@ const Profile = (props) => {
 
 
     const dispatch = useDispatch()
-    let { name, age, showName } = useSelector(state => state.profile)
+    let { name, age, showName } = useSelector(profileSelector)
     useEffect (() => {
         setProfileName(name)
         setProfileAge(age)
@@ -69,7 +70,7 @@ const Profile = (props) => {
                     onChange={ handleShowName }
                 />
                 <span>{ showName ? <span>Hide me!</span> : <span>Show name</span> }</span>
-                { showName ? <p>{ name }</p> : <p>Gues who?</p> }
+                { showName ? <p>{ name }</p> : <p>Guess who?</p> }
             </div>
         </div>
     )

@@ -1,6 +1,7 @@
 import './App.css';
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import { useSelector } from 'react-redux';
+import { profileSelector } from './Selectors/profile';
 
 
 // import GenerateList from './GenerateList.js';
@@ -20,7 +21,7 @@ const App = () => {
     },
   });
 
-  const { name, age } = useSelector(state => state.profile)
+  const { name } = useSelector(profileSelector)
  
   return (
     <ThemeProvider theme={ theme }>
