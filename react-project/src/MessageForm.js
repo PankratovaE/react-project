@@ -31,8 +31,8 @@ const MessageForm = (props) => {
 
   const handleValue = (event) => {
     setValue(event.target.value)
-    
   }
+  
   const handleValueText = (event) => {
     setValueText(event.target.value)
   }
